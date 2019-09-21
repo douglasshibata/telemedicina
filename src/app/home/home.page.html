@@ -1,14 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
+  <ion-toolbar color='tertiary'>
+    <ion-title slot="start">
+      Chat
     </ion-title>
+      <ion-button (click)="onLogout()" color="danger" slot="end">
+        <ion-icon name="remove"></ion-icon>
+      </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content class="ion-padding">
+  <ion-list>
+      <ion-item *ngFor ="let chat of chatRooms" (click)="openChat(chat)">
+        <ion-avatar slot="start">
+          <!--<ion-img [src]="chat.img"></ion-img>-->
+        </ion-avatar>
+        <ion-label>
+          <h2><b>{{chat.name}}</b></h2>
+          <p>{{chat.descricao}}</p>
+        </ion-label>
+      </ion-item>
+  </ion-list>
 </ion-content>
