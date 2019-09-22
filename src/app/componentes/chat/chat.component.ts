@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams,ModalController } from "@ionic/angular";
-
+import { NavParams, ModalController } from "@ionic/angular";
+import { message } from "../../models/message";
+import { ChatsService } from "../../service/chats.service";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -8,13 +9,27 @@ import { NavParams,ModalController } from "@ionic/angular";
 })
 export class ChatComponent implements OnInit {
 
-  public name: string;
-  constructor(private navparams:NavParams, private modalController: ModalController) { }
+  public chat: any;
+  public mensagens = [];
+  public message: message;
+  public room: any;
+  constructor(
+    private chatService: ChatsService,
+    private navparams: NavParams,
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {
-    this.name = this.navparams.get('name');
+    //16:02
+    this.chatService.getChatRoom(this.chat.id).subscribe(room=>{
+      this.room = room;
+    })
+    this.chat = this.navparams.get('chat');
   }
-  closeChat(){
+  closeChat() {
     this.modalController.dismiss();
+  }
+  sendMessage() {
+    this.mensagens.push(this.message);
   }
 }

@@ -10,7 +10,7 @@ export class AuthService {
     private Afauth: AngularFireAuth,
     private router: Router
   ) { }
-    //25:24
+    
   login(email:string,password:string){
 
     return new Promise((resolve,rejected)=>{
