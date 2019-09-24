@@ -10,9 +10,10 @@ import { ChatsService } from "../../service/chats.service";
 export class ChatComponent implements OnInit {
 
   public chat: any;
-  public mensagens = [];
+  public messages = [];
   public message: message;
   public room: any;
+  public msg: string;
   constructor(
     private chatService: ChatsService,
     private navparams: NavParams,
@@ -20,8 +21,8 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //16:02
-    this.chatService.getChatRoom(this.chat.id).subscribe(room=>{
+    this.chatService.getChatRoom(this.chat.id).subscribe(room => {
+
       this.room = room;
     })
     this.chat = this.navparams.get('chat');
@@ -30,6 +31,13 @@ export class ChatComponent implements OnInit {
     this.modalController.dismiss();
   }
   sendMessage() {
-    this.mensagens.push(this.message);
+    const messaje: message = {
+      content: this.msg,
+      type: 'text',
+      date: new Date()
+    }
+    this.chatService.sendMsgToFirebase(messaje, this.chat.id);
+    this.msg = "";
+    //this.messages.push(this.message);
   }
 }

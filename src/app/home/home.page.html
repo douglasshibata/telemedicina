@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-toolbar color='tertiary'>
-    <ion-title slot="start">
+  <ion-toolbar color="danger">
+    <ion-button fill="clear" slot="end" (click)="presentActionSheet()">
+      <ion-icon slot="icon-only" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title slot="start" >
       Chat
     </ion-title>
-      <ion-button (click)="onLogout()" color="danger" slot="end">
-        <ion-icon name="remove"></ion-icon>
-      </ion-button>
+     <!--  <ion-button (click)="onLogout()" color="danger" slot="end">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button> -->
   </ion-toolbar>
 </ion-header>
 
