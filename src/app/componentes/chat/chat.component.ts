@@ -11,7 +11,7 @@ export class ChatComponent implements OnInit {
 
   public chat: any;
   public messages = [];
-  public message: message;
+  //public message: message;
   public room: any;
   public msg: string;
   constructor(

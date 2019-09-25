@@ -18,11 +18,10 @@
 <ion-footer class="ion-padding">
   <ion-item>
     <ion-item>
-    <ion-label position="floating">Description</ion-label>
-      <ion-textarea [(ngModel)]="message"></ion-textarea>
-      <ion-button (click)="sendMessage()" color="success">
+      <ion-textarea [(ngModel)]="msg"></ion-textarea>
+      <ion-button (click)="sendMessage()" color="success" slot="end">
         <ion-icon name="send"></ion-icon>
       </ion-button>
     </ion-item>
-  </ion-item>
+  </ion-item> 
 </ion-footer>

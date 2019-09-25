@@ -28,10 +28,10 @@ export class ChatsService {
     }))
   }
   getChatRoom(chat_id:string){
-    return this.db.collection("chatsRooms").doc(chat_id).valueChanges()
+    return this.db.collection('chatsRooms').doc(chat_id).valueChanges()
   }
   sendMsgToFirebase(message: message , chat_id:string){
-    this.db.collection("chatsRooms").doc(chat_id).update({
+    this.db.collection('chatsRooms').doc(chat_id).update({
       messages: firestore.FieldValue.arrayUnion(message),
     })
   }

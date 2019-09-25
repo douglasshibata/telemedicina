@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" name="email" placeholder="Digite o seu Email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password"  name="password" placeholder="Digite a sua Senha"></ion-input>
+    </ion-item>
+  <ion-button expand="block" (click)="onSubmitLogin()" color="danger">
+  <ion-icon name="log-in"></ion-icon>
+    Entrar
+  </ion-button>  
+  </ion-content>
+  
