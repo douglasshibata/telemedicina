@@ -1,25 +1,52 @@
 <!-- Crie uma página contendo um grupo de checkboxes e um grupo de elementos radio. Faça com que algum elemento da tela seja modificado a cada clique em um dos elementos, de acordo com a opção (radio) ou opções (checkbox) selecionadas -->
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Exercicio7</title>
-    <script>
+    <script type="text/javascript" defer>
+        function mudacor() {
+            let a = document.getElementsByTagName('p')[3];
+            a.style.color = 'blue';
+        }
+        function mudaFonte() {
+            document.getElementsByTagName('p')[3].style.fontSize = '40px';
+        }
+        function volta() {
+            let b = document.getElementsByTagName('p')[3];
+            b.style.color = 'black';
+            b.style.fontSize = '20px';
+        }
+        function mudaFundo() {
+            document.getElementsByTagName('p')[3].style.background = 'green';
+            document.getElementsByTagName('p')[3].style.background = 'white';
 
+        }
+        function mudaFundo2() {
+            document.getElementsByTagName('p')[3].style.background = 'red';
+            document.getElementsByTagName('p')[3].style.background = 'white';
+
+        }
     </script>
 </head>
+
 <body>
     <fieldset>
         <legend>Escolha o que deseja fazer com o texto</legend>
-    <form>
-        <label for="">Teste</label>
-        <input type="checkbox" name="op1" id="op1">
-        <input type="checkbox" name="op2" id="op2">
-        <label for="">teste2</label>
-        <input type="radio" name="op3" id="op3">
-        <input type="radio" name="op3" id="op4">
-    </form>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita repellat corrupti praesentium laudantium? Et consectetur, expedita, alias quia qui doloribus possimus architecto minima aliquam voluptate laudantium dignissimos accusamus, ut quod!</p>
+        <form>
+            <label for="">Mudando a fonte e a cor</label>
+            <p> <input type="checkbox" name="op1" id="op1" onclick="mudacor()" ondblclick="volta()"> Trocar a cor </p>
+            <p><input type="checkbox" name="op2" id="op2" onclick="mudaFonte()" ondblclick="volta()"> Trocar o tamanho
+                da fonte </p>
+            <label for="">Mudando a cor de Fundo </label>
+            <p><input type="radio" name="op3" id="op3" onclick="mudaFundo()"> Verde
+                <input type="radio" name="op3" id="op4" onclick="mudaFundo2()">Vermelho</p>
+        </form>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita repellat corrupti praesentium laudantium?
+            Et consectetur, expedita, alias quia qui doloribus possimus architecto minima aliquam voluptate laudantium
+            dignissimos accusamus, ut quod!</p>
     </fieldset>
 </body>
+
 </html>
