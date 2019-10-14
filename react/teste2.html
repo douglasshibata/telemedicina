@@ -1,0 +1,23 @@
+<!-- . Crie uma página com um elemento de texto e dois botões. O primeiro, ao ser clicado, deve aumentar um pouco o tamanho do texto daquele elemento, e o segundo, diminuir.
+
+Dica: armazene o tamanho como uma variável numérica no escopo global e componha a propriedade CSS acrescentando "px" a esse número (exemplo: "12px"). -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercicio9</title>
+    <script>
+        function aumenta(){
+            document.getElementsByTagName('p')[0].style.fontSize ='40px';
+        }
+        function diminui(){
+            document.getElementsByTagName('p')[0].style.fontSize = '20px';
+        }
+    </script>
+</head>
+<body>
+    <p style="font-size: 20px; text-align: justify"> Lorem ipsum dolor sit amet consectetur adipisicing elit. At sint neque esse beatae eaque, rerum vero totam quo, laborum quibusdam est. Culpa aspernatur excepturi dolorem, voluptatibus perspiciatis fugit expedita nobis.</p>
+    <button onclick="aumenta()">Aumenta o texto</button>
+    <button onclick="diminui()">Diminui o texto</button>
+</body>
+</html>
