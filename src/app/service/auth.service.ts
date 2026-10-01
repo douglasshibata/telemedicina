@@ -27,17 +27,18 @@ export class AuthService {
       this.router.navigate(['/login']);
     });
   }
-  register(email:string,password:string, nome:string){
-    return new Promise((resolve,reject)=>{
-      this.Afauth.auth.createUserWithEmailAndPassword(email,password).then(res =>{
-          const uid = res.user.uid
-          this.db.collection('users').doc(res.user.uid).set({
-            name: name,
+  register(email: string, password: string, nome: string) {
+    return new Promise((resolve, reject) => {
+      this.Afauth.auth.createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          const uid = res.user.uid;
+          // Fix: Use 'nome' parameter instead of undefined 'name' variable
+          return this.db.collection('users').doc(uid).set({
+            name: nome,
             uid: uid
-          })
-        resolve(res)
-      }).catch(err=>reject(err))
+          }).then(() => resolve(res));
+        })
+        .catch(err => reject(err));
     });
-    
   }
 }

@@ -21,23 +21,27 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.chatService.getChatRoom(this.chat.id).subscribe(room => {
-
-      this.room = room;
-    })
+    // Fix: Retrieve chat object from navparams before using chat.id
     this.chat = this.navparams.get('chat');
+    if (this.chat && this.chat.id) {
+      this.chatService.getChatRoom(this.chat.id).subscribe(room => {
+        this.room = room;
+      });
+    }
   }
   closeChat() {
     this.modalController.dismiss();
   }
   sendMessage() {
+    if (!this.msg || !this.msg.trim() || !this.chat || !this.chat.id) {
+      return;
+    }
     const messaje: message = {
-      content: this.msg,
+      content: this.msg.trim(),
       type: 'text',
       date: new Date()
-    }
+    };
     this.chatService.sendMsgToFirebase(messaje, this.chat.id);
     this.msg = "";
-    //this.messages.push(this.message);
   }
 }

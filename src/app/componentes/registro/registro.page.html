@@ -8,7 +8,7 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Nome</ion-label>
-    <ion-input type="text" placeholder="Digite o seu nome" [(ngModel)]="nome"></ion-input>
+    <ion-input type="text" placeholder="Digite o seu nome" [(ngModel)]="nome" name="nome"></ion-input>
   </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
@@ -20,11 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Confirmar Senha</ion-label>
-      <ion-input type="password"  name="password" placeholder="Digite a sua Senha"></ion-input>
-  </ion-item>
-    <ion-item>
-      <ion-label>Input <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input  type="radio"  value="teste" required></ion-input>
+      <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirme a sua Senha"></ion-input>
     </ion-item>
   <ion-button expand="block" (click)="onSubmitRegister()" color="secondary">
   <ion-icon name="log-in"></ion-icon>
