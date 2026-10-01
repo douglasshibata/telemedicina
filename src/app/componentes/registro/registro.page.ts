@@ -10,14 +10,28 @@ export class RegistroPage implements OnInit {
 
   public email: string;
   public password: string;
-  public nome :string;
-  constructor(private auth: AuthService, private router:Router) { }
+  public confirmPassword: string;
+  public nome: string;
+
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
+
   onSubmitRegister() {
-    this.auth.register(this.email, this.password, this.nome).then(auth=>{
-      this.router.navigate(['home']);
-    }).catch(err => console.log(err))
+    if (!this.nome || !this.email || !this.password) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+    if (this.password !== this.confirmPassword) {
+      alert('As senhas não coincidem!');
+      return;
+    }
+    this.auth.register(this.email, this.password, this.nome).then(auth => {
+      this.router.navigate(['/home']);
+    }).catch(err => {
+      alert('Erro ao registrar usuário. Verifique os dados fornecidos.');
+      console.error(err);
+    });
   }
 }

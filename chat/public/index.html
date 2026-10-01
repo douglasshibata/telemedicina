@@ -19,29 +19,38 @@
         <button type="submit">Enviar</button>
     </form>
     <script type="text/javascript">
-        var socket = io('http://localhost:3000');
-        function renderMessage(message){
-            $('.messages').append('<div class="message"><strong>'+ message.author+"</strong>:"+message.message+"</div>" )
+        var socket = io(window.location.origin);
+        function renderMessage(message) {
+            // Prevent XSS by building text nodes securely rather than raw string injection
+            var $author = $('<strong>').text(message.author);
+            var $msgDiv = $('<div class="message"></div>')
+                .append($author)
+                .append(': ')
+                .append(document.createTextNode(message.message));
+            $('.messages').append($msgDiv);
         }
-        socket.on('previousMessage',function(messages){
-            for(message of messages){
-                renderMessage(message)
+        socket.on('previousMessage', function(messages) {
+            if (Array.isArray(messages)) {
+                for (var i = 0; i < messages.length; i++) {
+                    renderMessage(messages[i]);
+                }
             }
         });
-        socket.on('receivedMessage',function(message){
+        socket.on('receivedMessage', function(message) {
             renderMessage(message);
         });
-        $('#chat').submit(function(event){
+        $('#chat').submit(function(event) {
             event.preventDefault();
-            var author = $('input[name=username]').val();
-            var message = $('input[name=message]').val();
-            if(author.length && message.length){
-                var messageObject ={
-                  author: author,
-                  message: message,  
+            var author = $.trim($('input[name=username]').val());
+            var message = $.trim($('input[name=message]').val());
+            if (author.length && message.length) {
+                var messageObject = {
+                    author: author,
+                    message: message
                 };
                 renderMessage(messageObject);
-                socket.emit('sendMessage',messageObject);
+                socket.emit('sendMessage', messageObject);
+                $('input[name=message]').val('');
             }
         });
     </script>

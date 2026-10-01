@@ -10,19 +10,35 @@ app.set('views', path.join(__dirname,'public'));
 app.engine('html',require('ejs').renderFile);
 app.set('view engine','html');
 
-app.use('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.render('index.html');
 });
+
 let messages = [];
-io.on('connection',socket =>{
+
+io.on('connection', socket => {
     console.log(`Socket Conectado: ${socket.id}`);
 
-    socket.on('sendMessage',data =>{
-        messages.push(data);
-        socket.broadcast.emit('receivedMessage',data);
-        console.log(data);
-        
+    // Send historical messages to the newly connected client
+    socket.emit('previousMessage', messages);
+
+    socket.on('sendMessage', data => {
+        if (!data || typeof data.author !== 'string' || typeof data.message !== 'string') {
+            return;
+        }
+        const cleanData = {
+            author: data.author.trim(),
+            message: data.message.trim()
+        };
+        if (cleanData.author && cleanData.message) {
+            messages.push(cleanData);
+            socket.broadcast.emit('receivedMessage', cleanData);
+            console.log(cleanData);
+        }
     });
-    
 });
-server.listen(3000);
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Chat server running on port ${PORT}`);
+});
